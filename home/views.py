@@ -34,7 +34,7 @@ def increase_calorie_for_meal(request, meal_type_id):
             'error_message': "You didn't select a choice.",
         })
     else:
-        selected_meal.calories += 1
+        selected_meal.calories += 2
         selected_meal.save()
         # Always return an HttpResponseRedirect after successfully dealing
         # with POST data. This prevents data from being posted twice if a
