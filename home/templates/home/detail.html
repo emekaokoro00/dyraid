@@ -1,0 +1,17 @@
+<h1>{{ meal_type.meal_type_name }}</h1>
+<ul>
+{% for meal in meal_type.meal_set.all %}
+    <li>{{ meal.food_name }}</li>
+{% endfor %}
+</ul>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="{% url 'home:increase_calorie_for_meal' meal_type.id %}" method="post">
+{% csrf_token %}
+{% for meal in meal_type.meal_set.all %}
+    <input type="radio" name="meal" id="meal{{ forloop.counter }}" value="{{ meal.id }}" />
+    <label for="meal{{ forloop.counter }}">{{ meal.calories }}</label><br />
+{% endfor %}
+<input type="submit" value="Increase Calories by 1" />
+</form>

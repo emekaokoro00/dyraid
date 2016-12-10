@@ -1,0 +1,9 @@
+{% if latest_meal_type_list %}
+    <ul>
+    {% for meal_type in latest_meal_type_list %}
+        <li><a href="{% url 'home:detail' meal_type.id %}">{{ meal_type.meal_type_name }}</a>: {{ meal_type.description }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No meal types are available.</p>
+{% endif %}

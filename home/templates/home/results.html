@@ -1,0 +1,9 @@
+<h1>{{ meal_type.meal_type_name }}</h1>
+
+<ul>
+{% for meal in meal_type.meal_set.all %}
+    <li>{{ meal.food_name }} -- {{ meal.calories }} Calorie{{ meal.calories|pluralize }}</li>
+{% endfor %}
+</ul>
+
+<a href="{% url 'home:detail' meal_type.id %}">Increase again?</a>
