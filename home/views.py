@@ -7,7 +7,7 @@ from django.views import generic
 
 from .models import Meal_Type, Meal
 
-
+#after Generic View
 class IndexView(generic.ListView):
     template_name = 'home/index.html'
     context_object_name = 'latest_meal_type_list'
