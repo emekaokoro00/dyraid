@@ -14,7 +14,7 @@ class IndexView(generic.ListView):
 
     def get_queryset(self):
         """Return the last five meal types."""
-        return Meal_Type.objects.order_by('meal_type_name')[:2]
+        return Meal_Type.objects.order_by('meal_type_name')[:4]
 
 
 class DetailView(generic.DetailView):

@@ -1,3 +1,8 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'home/style1.css' %}" />
+
+
 {% if latest_meal_type_list %}
     <ul>
     {% for meal_type in latest_meal_type_list %}

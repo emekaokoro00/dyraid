@@ -10,7 +10,8 @@ from .models import Logger, Meal, Meal_Type
 #     class Meta:
 #         model = Logger
 #         fields = ['last_edit_date', 'entry']
-        
+     
+# Changing the html elements using forms   
 class LoggerForm(forms.ModelForm):  #{
     last_edit_date = forms.DateTimeField(widget=forms.SelectDateWidget)
     title = forms.CharField(widget=forms.TextInput)
@@ -23,8 +24,11 @@ class LoggerForm(forms.ModelForm):  #{
 #}   
     
 class LoggerAdmin(admin.ModelAdmin):
-    form = LoggerForm
-
+    #form = LoggerForm
+    fieldsets = [
+        (None, {'fields': ['last_edit_date']}),
+        ('Details', {'fields': ['title', 'entry']}),
+    ]
 
 admin.site.register(Logger, LoggerAdmin)
 admin.site.register(Meal)

@@ -21,7 +21,8 @@ class Logger(models.Model): #{
     def __str__(self):
         return self.title    
     def was_edited_recently(self):
-        return self.last_edit_date >= timezone.now() - datetime.timedelta(days=1)
+        now = timezone.now()
+        return now - datetime.timedelta(days=1) <= self.last_edit_date <= now
 #}
     
 @python_2_unicode_compatible # to support Python 2
