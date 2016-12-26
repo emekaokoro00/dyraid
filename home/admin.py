@@ -5,6 +5,11 @@ from django import forms
 # Register your models here.
 from .models import Logger, Meal, Meal_Type
 
+#set admin title
+admin.site.site_header = 'Dyraid'
+admin.site.index_title = 'Dyraid'
+admin.site.site_title = 'Dyraid'
+
 
 # class LoggerForm(ModelForm):
 #     class Meta:

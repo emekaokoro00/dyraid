@@ -294,7 +294,7 @@
 
                 <div class="row x_title">
                   <div class="col-md-6">
-                    <h3>Network Activities <small>Graph title sub-title</small></h3>
+                    <h3>Progress <small></small></h3>
                   </div>
                   <div class="col-md-6">
                     <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
@@ -313,7 +313,7 @@
                 </div>
                 <div class="col-md-3 col-sm-3 col-xs-12 bg-white">
                   <div class="x_title">
-                    <h2>Top Campaign Performance</h2>
+                    <h2>Thumbs Up</h2>
                     <div class="clearfix"></div>
                   </div>
 
@@ -322,7 +322,7 @@
                       <p>Facebook Campaign</p>
                       <div class="">
                         <div class="progress progress_sm" style="width: 76%;">
-                          <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="80"></div>
+                          <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="20"></div>
                         </div>
                       </div>
                     </div>
@@ -361,8 +361,9 @@
             </div>
 
           </div>
-          <br />
-
+       
+         <br />        
+        
           <div class="row">
 
 
@@ -609,8 +610,7 @@
             </div>
 
           </div>
-
-
+         
 <!-- 
           <div class="row">
             <div class="col-md-4 col-sm-4 col-xs-12">
@@ -949,6 +949,7 @@
           </div>
     -->     
         
+          
           <!-- bottom tiles -->
           <div class="row tile_count">
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
@@ -1125,9 +1126,9 @@
     <!-- /Flot -->
 
     <!-- jVectorMap -->
-    <script src="js/maps/jquery-jvectormap-world-mill-en.js"></script>
-    <script src="js/maps/jquery-jvectormap-us-aea-en.js"></script>
-    <script src="js/maps/gdp-data.js"></script>
+    <script src="{% static 'home/gentelella/production/js/maps/jquery-jvectormap-world-mill-en.js' %}"></script>
+    <script src="{% static 'home/gentelella/production/js/maps/jquery-jvectormap-us-aea-en.js' %}"></script>
+    <script src="{% static 'home/gentelella/production/js/maps/gdp-data.js' %}"></script>
     <script>
       $(document).ready(function(){
         $('#world-map-gdp').vectorMap({
