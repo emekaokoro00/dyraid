@@ -1,47 +1,53 @@
 from django.shortcuts import render, get_object_or_404
-
-# Create your views here.
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.views import generic
 
+# Create your views here.
 from .models import Meal_Type, Meal
 
-#after Generic View
-class IndexView(generic.ListView):
-    template_name = 'home/index.html'
-    context_object_name = 'latest_meal_type_list'
 
-    def get_queryset(self):
-        """Return the last five meal types."""
-        return Meal_Type.objects.order_by('meal_type_name')[:4]
+# #after Generic View
+# class IndexView(generic.ListView):
+#     template_name = 'home/index.html'
+#     context_object_name = 'latest_meal_type_list'
+# 
+#     def get_queryset(self):
+#         """Return the last five meal types."""
+#         return Meal_Type.objects.order_by('meal_type_name')[:4]
+# 
+# 
+# class DetailView(generic.DetailView):
+#     model = Meal_Type
+#     template_name = 'home/detail.html'
+# 
+# 
+# class ResultsView(generic.DetailView):
+#     model = Meal_Type
+#     template_name = 'home/results.html'
 
-
-class DetailView(generic.DetailView):
-    model = Meal_Type
-    template_name = 'home/detail.html'
-
-
-class ResultsView(generic.DetailView):
-    model = Meal_Type
-    template_name = 'home/results.html'
-
-
+# @login_required(login_url="home/login/")
 # def index(request):
-#     latest_meal_type_list = Meal_Type.objects.order_by('-meal_type_name')[:5]
-#     context = {'latest_meal_type_list': latest_meal_type_list}
-#     return render(request, 'home/index.html', context)
-# 
-# # Logger with rating, Meal with Meal Type
-# def detail(request, meal_type_id):
-#     meal_type = get_object_or_404(Meal_Type, pk=meal_type_id)
-#     context = {'meal_type': meal_type}
-#     return render(request, 'home/detail.html', context)
-# 
-# def results(request, meal_type_id):
-#     meal_type = get_object_or_404(Meal_Type, pk=meal_type_id)
-#     context = {'meal_type': meal_type}
-#     return render(request, 'home/results.html', context)
+#     return render(request,"home/index.html")
+
+
+@login_required() # settings for redirect found in settings.py - LOGIN_URL
+def index(request):
+    latest_meal_type_list = Meal_Type.objects.order_by('-meal_type_name')[:5]
+    context = {'latest_meal_type_list': latest_meal_type_list}
+    return render(request, 'home/index.html', context)
+ 
+# Logger with rating, Meal with Meal Type
+def detail(request, meal_type_id):
+    meal_type = get_object_or_404(Meal_Type, pk=meal_type_id)
+    context = {'meal_type': meal_type}
+    return render(request, 'home/detail.html', context)
+ 
+def results(request, meal_type_id):
+    meal_type = get_object_or_404(Meal_Type, pk=meal_type_id)
+    context = {'meal_type': meal_type}
+    return render(request, 'home/results.html', context)
 
 def increase_calorie_for_meal(request, meal_type_id):
     meal_type = get_object_or_404(Meal_Type, pk=meal_type_id)

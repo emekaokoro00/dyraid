@@ -96,6 +96,11 @@ DATABASES = {
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
 
+# ACCOUNT_ACTIVATION_DAYS = 7 #for django-registration
+
+LOGIN_URL = '/login/' # login url when user not authenticated
+LOGIN_REDIRECT_URL = '/' # for url management when adding login
+
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
