@@ -5,6 +5,8 @@ from . import views
 app_name = 'home'
 urlpatterns = [
     url(r'^$', views.index, name='index'),
+    url(r'^logout/$', views.logout_view, name='logout'), 
+    url(r'^register/$', views.create_user, name='register'), 
     url(r'^(?P<pk>[0-9]+)/$', views.detail, name='detail'),
     url(r'^(?P<pk>[0-9]+)/results/$', views.results, name='results'),
     url(r'^(?P<meal_type_id>[0-9]+)/increase_calorie_for_meal/$', views.increase_calorie_for_meal, name='increase_calorie_for_meal'),

@@ -100,6 +100,7 @@ DATABASES = {
 
 LOGIN_URL = '/login/' # login url when user not authenticated
 LOGIN_REDIRECT_URL = '/' # for url management when adding login
+# LOGOUT_REDIRECT_URL = '/logout/' # for url management when adding login
 
 AUTH_PASSWORD_VALIDATORS = [
     {
