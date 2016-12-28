@@ -1,12 +1,18 @@
-{% extends "admin/change_form.html" %}
+{% extends "registration/registration_base.html" %}
+
 {% load i18n %}
 
-{% block form_top %}
+{% comment %}{% block form_top %}{% endblock %}{% endcomment %}
+{% block content %}
+ {% block object-tools %}{% endblock %}
+
+{% comment %}
   {% if not is_popup %}
     <p>{% trans "First, enter a username and password. Then, you'll be able to edit more user options." %}</p>
   {% else %}
     <p>{% trans "Enter a username and password." %}</p>
   {% endif %}
+  {% endcomment %}
   
   <form method="post" action="">
     {% csrf_token %}
@@ -14,5 +20,7 @@
     <input type="submit" value="Create new user account" />
 </form>
   
-  
+{{ content }}
 {% endblock %}
+  
+

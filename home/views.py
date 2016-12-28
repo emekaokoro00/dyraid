@@ -37,7 +37,7 @@ def create_user(request):
     else:
         form = UserForm() 
 
-    return render(request, 'home/register_add.html', {'form': form})
+    return render(request, 'home/registration_form.html', {'form': form})
  
 # Logger with rating, Meal with Meal Type
 def detail(request, meal_type_id):

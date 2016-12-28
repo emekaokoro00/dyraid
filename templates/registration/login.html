@@ -1,4 +1,4 @@
-{% extends "admin/base_site.html" %}
+{% extends "registration/registration_base.html" %}
 {% load i18n static %}
 
 {% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/login.css" %}" />
@@ -64,6 +64,6 @@
 
 </div>
 <div>
-<a href="{% url 'home:register' %}">Sign Up</a>
+<a href="{% url 'registration_register' %}">Sign Up 2</a>
 </div>
 {% endblock %}

@@ -32,13 +32,18 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'home.apps.HomeConfig',
+    #'home'
+    
+    #from django-registration-redux
+    'django.contrib.sites',
+    'registration', #should be immediately above 'django.contrib.auth'
+    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #'home'
 ]
 
 MIDDLEWARE = [
@@ -64,6 +69,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                
             ],
         },
     },
@@ -96,7 +102,11 @@ DATABASES = {
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
 
-# ACCOUNT_ACTIVATION_DAYS = 7 #for django-registration
+#for django-registration
+ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window; you may, of course, use a different value.
+REGISTRATION_AUTO_LOGIN = True # Automatically log the user in.
+
+SITE_ID = 1
 
 LOGIN_URL = '/login/' # login url when user not authenticated
 LOGIN_REDIRECT_URL = '/' # for url management when adding login
