@@ -303,7 +303,7 @@
 		
   	</div>
     	    	
-	<div class="right_col {% block coltype %}colM{% endblock %}" role="main">	
+	<div class="right_col" role="main">	
 	
         {% block content_title %}{% if title %}<i class="fa fa-paw"></i> <span>{{ title }}</span>{% endif %}{% endblock %}
         
@@ -312,10 +312,11 @@
 	    {% block object-tools %}{% endblock %}
 		{{ content }}
        	{% endblock %}
-        {% block sidebar %}{% endblock %}
-	        <br class="clear" />
        	<!-- /page content -->
        	       	
+	        <br class="clear" />
+        {% block sidebar %}{% endblock %}
+	        <br class="clear" />
 
         <!-- footer content -->
         <footer>
@@ -366,6 +367,7 @@
 
     <!-- Custom Theme Scripts -->
     <script src="{% static 'home/gentelella/build/js/custom.min.js' %}"></script>
+    <script src="{% static 'home/overrides/build/js/custom.js' %}"></script>
 
     <!-- Flot -->
     <script>

@@ -780,7 +780,7 @@
 {% block logout_url %}<a href="{% url 'admin:logout' %}"><i class="fa fa-sign-out pull-right"></i> {% trans 'Log out' %}</a>{% endblock %}
 
 {% block sidebar %}
-<div id="content-related">
+<div><!--  </div><div id="content-related">-->
     <div class="module" id="recent-actions-module">
         <h2>{% trans 'Recent actions' %}</h2>
         <h3>{% trans 'My actions' %}</h3>
