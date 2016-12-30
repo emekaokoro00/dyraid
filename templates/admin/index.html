@@ -53,9 +53,7 @@
 {% endcomment %}
 -->
 
-
-<div class="right_col" role="main">
-
+{% comment %}
           <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="dashboard_graph">
@@ -735,12 +733,52 @@
             </div>
           </div>
           <!-- /bottom tiles -->
-        
-</div>
+ {% endcomment %} 
+ 
+ 
+                   
+{% if app_list %}
+    {% for app in app_list %}
+        <div class="app-{{ app.app_label }} module">
+        <table>
+        <caption>
+            <a href="{{ app.app_url }}" class="section" title="{% blocktrans with name=app.name %}Models in the {{ name }} application{% endblocktrans %}">{{ app.name }}</a>
+        </caption>
+        {% for model in app.models %}
+            <tr class="model-{{ model.object_name|lower }}">
+            {% if model.admin_url %}
+                <th scope="row"><a href="{{ model.admin_url }}">{{ model.name }}</a></th>
+            {% else %}
+                <th scope="row">{{ model.name }}</th>
+            {% endif %}
 
+            {% if model.add_url %}
+                <td><a href="{{ model.add_url }}" class="addlink">{% trans 'Add' %}</a></td>
+            {% else %}
+                <td>&nbsp;</td>
+            {% endif %}
+
+            {% if model.admin_url %}
+                <td><a href="{{ model.admin_url }}" class="changelink">{% trans 'Change' %}</a></td>
+            {% else %}
+                <td>&nbsp;</td>
+            {% endif %}
+            </tr>
+        {% endfor %}
+        </table>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>{% trans "You don't have permission to edit anything." %}</p>
+{% endif %}
+ 
+       
 {% endblock %}
 
+{% block index_page %}<a href="{% url 'admin:index' %}" class="site_title"><i class="fa fa-paw"></i> <span> Home </span></a>{% endblock %}
+{% block change_password_url %}<a href="{% url 'admin:password_change' %}"><i class="fa pull-right"></i> {% trans 'Change password' %}</a>{% endblock %}
 {% block logout_url %}<a href="{% url 'admin:logout' %}"><i class="fa fa-sign-out pull-right"></i> {% trans 'Log out' %}</a>{% endblock %}
+
 {% block sidebar %}
 <div id="content-related">
     <div class="module" id="recent-actions-module">

@@ -1,1 +1,24 @@
 {% extends "admin/base_site.html" %}
+{% load i18n static %}
+
+{% block index_page %}
+{% if has_permission %}
+	<a href="{% url 'admin:index' %}" class="site_title"><i class="fa fa-paw"></i> <span> Home </span></a>
+{% else %}
+	<a href="{% url 'home:index' %}" class="site_title"><i class="fa fa-paw"></i> <span> Home </span></a>
+{% endif %}
+{% endblock %}
+{% block change_password_url %}
+{% if has_permission %}
+	<a href="{% url 'admin:password_change' %}"><i class="fa pull-right"></i> {% trans 'Change password' %}</a>
+{% else %}
+	<a href="{% url 'auth_password_change' %}"><i class="fa pull-right"></i> {% trans 'Change password' %}</a>
+{% endif %}
+{% endblock %}
+{% block logout_url %}
+{% if has_permission %}
+	<a href="{% url 'admin:logout' %}"><i class="fa fa-sign-out pull-right"></i> {% trans 'Log out' %}</a>
+{% else %}
+	<a href="{% url 'auth_logout' %}"><i class="fa fa-sign-out pull-right"></i> {% trans 'Log out' %}</a>
+{% endif %}
+{% endblock %}
