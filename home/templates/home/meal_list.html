@@ -1,0 +1,27 @@
+<!-- <h1>Meals</h1>
+<ul>
+    {% for meal in object %}
+    <li>{{ meal.id }} - {{ meal.food_name }}  :  
+    <a href="{% url "home:meal_update" meal.id %}">edit</a>
+    <a href="{% url "home:meal_delete" meal.id %}">delete</a>
+    </li>
+    {% endfor %}
+</ul>
+
+<a href="{% url "home:meal_create" %}">New</a> -->
+
+<h1>Meals</h1>
+{% if meal_list %}
+    <ul>
+    {% for meal in meal_list %}
+        <li>{{ meal.id }} - {{ meal.food_name }}  :  
+		    <a href="{% url "home:meal_detail" meal.id %}">view</a>
+		    <a href="{% url "home:meal_update" meal.id %}">edit</a>
+		    <a href="{% url "home:meal_delete" meal.id %}">delete</a>
+	    </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No meals are available.</p>
+{% endif %}
+<a href="{% url "home:meal_create" %}">New</a> 

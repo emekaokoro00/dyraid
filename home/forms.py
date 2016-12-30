@@ -2,8 +2,9 @@ from django.contrib.auth.models import User
 from django import forms
 from django.forms import ModelForm
 
-class UserForm(ModelForm):       
-        
+from .models import Meal_Type, Meal
+
+class UserForm(ModelForm):  
     # last_edit_date = forms.DateTimeField(widget=forms.SelectDateWidget)
     username = forms.CharField(widget=forms.TextInput)
     email = forms.CharField(widget=forms.TextInput)
@@ -16,3 +17,15 @@ class UserForm(ModelForm):
         model = User
         fields = ('username', 'email', 'password', 'first_name', 'last_name')
 #}   
+
+class MealForm(forms.ModelForm):    
+    food_name = forms.CharField(widget=forms.TextInput)
+    # food_type = forms.ChoiceField(widget=forms.Select)
+    calories = forms.IntegerField(widget=forms.NumberInput)
+    def send_calorie_number(self):
+        # send calorie number
+        pass
+    class Meta:
+        model = Meal
+        fields = ['food_name', 'food_type', 'calories']     
+    

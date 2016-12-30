@@ -1,0 +1,7 @@
+<h1>Meal</h1>
+<p>Name: {{ meal.food_name }}</p>
+<p>Type: {{ meal.food_type }}</p>
+<p>Calories: {{ meal.calories }}</p>
+
+ <a href="{% url "home:meal_update" meal.id %}">edit</a> |  <a href="{% url "home:meal_delete" meal.id %}">delete</a>
+ <a href="{% url "home:meal_list" %}">Back To List</a>

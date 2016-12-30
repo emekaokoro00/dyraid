@@ -1,16 +1,20 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse_lazy
 
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.views import generic
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import FormView, CreateView, UpdateView, DeleteView
+from django.forms.models import ModelForm
 
-from .forms import UserForm
 from django.contrib.auth.models import User
 
 # Create your views here.
 from .models import Meal_Type, Meal
+from .forms import UserForm, MealForm
 
 
 #NOTES
@@ -70,6 +74,81 @@ def increase_calorie_for_meal(request, meal_type_id):
 
 def rate(request, logger_id):
     return HttpResponse("You're rating on Logger %s." % logger_id)
+
+#FBV
+# def meal_list(request, template_name='home/meal_list.html'):
+#     meal_list = Meal.objects.all()
+# #     data = {}
+# #     data['object_list'] = meals
+# #     return render(request, template_name, data)
+#     context = {'meal_list':meal_list}
+#     return render(request, template_name, context)
+#     
+# def meal_create(request, template_name='home/meal_form.html'):
+#     form = MealForm(request.POST or None)
+#     if form.is_valid():
+#         form.save()
+#         return redirect('meal_list')
+#     return render(request, template_name, {'form':form})  
+# 
+# def meal_detail(request, pk, template_name='home/meal_detail.html'):
+#     meal = get_object_or_404(Meal, pk=pk)
+#     form = MealDetailForm(request.POST or None, instance=meal)
+#     context = {'meal':meal}
+#     return render(request, template_name, context)
+#     
+# def meal_update(request, pk, template_name='home/meal_form.html'):
+#     meal = get_object_or_404(Meal, pk=pk)
+#     form = MealForm(request.POST or None, instance=meal)
+#     if form.is_valid():
+#         form.save()
+#         return redirect('home:meal_list')
+#     return render(request, template_name, {'form':form})
+#     
+# def meal_delete(request, pk, template_name='home/meal_confirm_delete.html'):
+#     meal = get_object_or_404(Meal, pk=pk)
+#     form = MealForm(request.POST or None, instance=meal)
+#     if request.method=='POST':
+#         meal.delete()
+#         return redirect('meal_list')
+#     return render(request, template_name, {'object':meal})
+
+
+#CBV
+# class MealSendCaloriesView(FormView):
+#     template_name = 'home/generic_action.html'
+#     form_class = MealSendCaloriesForm
+#     success_url = 'home/thanks/'
+#     def form_valid(self, form):
+#         # This method is called when valid form data has been POSTed
+#         # It should retunr an HttpResponse
+#         form.send_calorie_number()
+#         return super(MealSendCaloriesView, self).form_valid(form)
+ 
+class MealList(generic.ListView):
+    model = Meal
+    context_object_name = 'meal_list' 
+    def get_queryset(self):
+        # """Return the last five meal types."""
+        return Meal.objects.order_by('food_name')[:10]
+     
+class MealCreate(CreateView):
+    model = Meal
+    fields = ['food_name', 'food_type', 'calories']
+    
+class MealDetail(DetailView):
+    model = Meal
+    fields = ['food_name', 'food_type', 'calories']
+    template_name_suffix = '_detail'
+     
+class MealUpdate(UpdateView):
+    model = Meal
+    fields = ['food_name', 'food_type', 'calories']
+    template_name_suffix = '_update_form'
+     
+class MealDelete(DeleteView):
+    model = Meal
+    success_url = reverse_lazy('home:meal_list')
 
 # #after Generic View
 # class IndexView(generic.ListView):

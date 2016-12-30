@@ -1,12 +1,13 @@
 from __future__ import unicode_literals
+from django.utils.encoding import python_2_unicode_compatible
+
+from django.urls import reverse
 
 from django import forms
-
 from django.db import models
 from django.forms import ModelForm
 from django.forms import forms
 from unittest.util import _MAX_LENGTH
-from django.utils.encoding import python_2_unicode_compatible
 from django.utils import timezone
 import datetime
 
@@ -39,5 +40,7 @@ class Meal(models.Model):
     calories = models.IntegerField(default=0)
     def __str__(self):
         return self.food_name
+    def get_absolute_url(self):
+        return reverse('home:meal_detail', kwargs={'pk': self.pk})
     
     
