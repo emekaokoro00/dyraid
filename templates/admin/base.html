@@ -25,6 +25,10 @@
 
     <!-- Custom Theme Style -->
     <link href="{% static 'home/gentelella/build/css/custom.min.css' %}" rel="stylesheet">
+    
+    <!-- jQuery - loaded here for main content script reasons, to identify # in content -->
+    <script src="{% static 'home/gentelella/vendors/jquery/dist/jquery.min.js' %}"></script>
+    
 	{% block extrastyle %}{% endblock %}
 	{% if LANGUAGE_BIDI %}<link rel="stylesheet" type="text/css" href="{% block stylesheet_rtl %}{% static "admin/css/rtl.css" %}{% endblock %}" />{% endif %}
 	{% block extrahead %}{% endblock %}
@@ -226,8 +230,6 @@
    </div>
 </div>   
 
-    <!-- jQuery -->
-    <script src="{% static 'home/gentelella/vendors/jquery/dist/jquery.min.js' %}"></script>
     <!-- Bootstrap -->
     <script src="{% static 'home/gentelella/vendors/bootstrap/dist/js/bootstrap.min.js' %}"></script>
     <!-- FastClick -->

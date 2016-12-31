@@ -42,7 +42,7 @@ class Meal(models.Model):
     calories = models.IntegerField(default=0)
     def __str__(self):
         return self.food_name
-    def get_absolute_url(self):
+    def get_absolute_url(self): # sets the default url to revert to after changes
         return reverse('home:meal_detail', kwargs={'pk': self.pk})
 
 @python_2_unicode_compatible # to support Python 2
@@ -50,10 +50,12 @@ class UserLog(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     meal = models.ForeignKey(Meal, on_delete=models.CASCADE)
     # log_time = models.DateTimeField('Time Logged')
-    log_time = models.DateTimeField('Time Logged')
+    log_time = models.DateTimeField('Time Logged', default=timezone.now())
     comment = models.CharField(max_length=1000)
     def __str__(self):
-        return self.user.get_short_name
-    def get_absolute_url(self):
+        return "Entry " + self.log_time.strftime('%Y/%b/%d/ - %I:%M:%S')
+    def __unicode__(self):
+        return unicode(self.user)
+    def get_absolute_url(self): # sets the default url to revert to after changes
         return reverse('home:userlog_detail', kwargs={'pk': self.pk})
     
