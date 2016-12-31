@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 
 from django.http import HttpResponseRedirect, HttpResponse
@@ -10,11 +12,9 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import FormView, CreateView, UpdateView, DeleteView
 from django.forms.models import ModelForm
 
-from django.contrib.auth.models import User
-
 # Create your views here.
-from .models import Meal_Type, Meal
-from .forms import UserForm, MealForm
+from .models import Meal_Type, Meal, UserLog
+from .forms import UserForm, MealForm, UserLogForm
 
 
 #NOTES
@@ -42,7 +42,7 @@ def create_user(request):
         form = UserForm() 
 
     return render(request, 'home/registration_form.html', {'form': form})
- 
+
 # Logger with rating, Meal with Meal Type
 def detail(request, meal_type_id):
     meal_type = get_object_or_404(Meal_Type, pk=meal_type_id)
@@ -124,47 +124,61 @@ def rate(request, logger_id):
 #         # It should retunr an HttpResponse
 #         form.send_calorie_number()
 #         return super(MealSendCaloriesView, self).form_valid(form)
- 
-class MealList(generic.ListView):
+
+#LoginRequiredMixin to make sure that user is logged in, redirects to url in settings
+
+class MealList(LoginRequiredMixin, generic.ListView):
     model = Meal
     context_object_name = 'meal_list' 
     def get_queryset(self):
         # """Return the last five meal types."""
         return Meal.objects.order_by('food_name')[:10]
      
-class MealCreate(CreateView):
+class MealCreate(LoginRequiredMixin, CreateView):
     model = Meal
-    fields = ['food_name', 'food_type', 'calories']
+    form_class = MealForm
     
-class MealDetail(DetailView):
+class MealDetail(LoginRequiredMixin, DetailView):
     model = Meal
-    fields = ['food_name', 'food_type', 'calories']
+    form_class = MealForm
     template_name_suffix = '_detail'
      
-class MealUpdate(UpdateView):
+class MealUpdate(LoginRequiredMixin, UpdateView):
     model = Meal
-    fields = ['food_name', 'food_type', 'calories']
+    form_class = MealForm
     template_name_suffix = '_update_form'
      
-class MealDelete(DeleteView):
+class MealDelete(LoginRequiredMixin, DeleteView):
     model = Meal
     success_url = reverse_lazy('home:meal_list')
+    
 
-# #after Generic View
-# class IndexView(generic.ListView):
-#     template_name = 'home/index.html'
-#     context_object_name = 'latest_meal_type_list'
-# 
-#     def get_queryset(self):
-#         """Return the last five meal types."""
-#         return Meal_Type.objects.order_by('meal_type_name')[:4]
-# 
-# 
-# class DetailView(generic.DetailView):
-#     model = Meal_Type
-#     template_name = 'home/detail.html'
-# 
-# 
-# class ResultsView(generic.DetailView):
-#     model = Meal_Type
-#     template_name = 'home/results.html'
+
+class UserLogList(LoginRequiredMixin, generic.ListView):
+    model = UserLog
+    context_object_name = 'userlog_list' 
+    def get_queryset(self):
+        # """Return the last five meal types."""
+        return UserLog.objects.order_by('log_time')[:10]
+     
+class UserLogCreate(LoginRequiredMixin, CreateView):
+    model = UserLog
+    form_class = UserLogForm
+    def form_valid(self, form):
+        form.instance.user = self.request.user #This is to populate user field with the currently logged on user
+        return super(UserLogCreate, self).form_valid(form)
+    
+class UserLogDetail(LoginRequiredMixin, DetailView):
+    model = UserLog
+    form_class = UserLogForm
+    template_name_suffix = '_detail'
+     
+class UserLogUpdate(LoginRequiredMixin, UpdateView):
+    model = UserLog
+    form_class = UserLogForm
+    template_name_suffix = '_update_form'
+     
+class UserLogDelete(LoginRequiredMixin, DeleteView):
+    model = UserLog
+    success_url = reverse_lazy('home:userlog_list')
+    

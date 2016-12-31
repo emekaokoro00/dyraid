@@ -1,0 +1,15 @@
+{% extends "home/index.html" %}
+{% load i18n static %}
+
+{% block content %}
+<div id="content-main">
+<h1>User Log</h1>
+<p>Meal: {{ userlog.meal }}</p>
+<p>Time: {{ userlog.log_time }}</p>
+<p>Comment: {{ userlog.comment }}</p>
+
+ <a href="{% url "home:userlog_update" userlog.id %}">Edit</a> |  <a href="{% url "home:userlog_delete" userlog.id %}">Delete</a> |
+ <a href="{% url "home:userlog_list" %}">Back To List</a>
+
+</div>
+{% endblock %}
