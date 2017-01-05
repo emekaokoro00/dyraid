@@ -5,6 +5,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.views import generic
@@ -129,10 +131,13 @@ def rate(request, logger_id):
 
 class MealList(LoginRequiredMixin, generic.ListView):
     model = Meal
+    # template_name = 'home/meal_list.html'  # Default: <app_label>/<model_name>_list.html
     context_object_name = 'meal_list' 
+    paginate_by = 4
+    # queryset = Meal.objects.all()  # Default: Model.objects.all()    
     def get_queryset(self):
         # """Return the last five meal types."""
-        return Meal.objects.order_by('food_name')[:10]
+        return Meal.objects.order_by('food_name')
      
 class MealCreate(LoginRequiredMixin, CreateView):
     model = Meal
@@ -157,9 +162,9 @@ class MealDelete(LoginRequiredMixin, DeleteView):
 class UserLogList(LoginRequiredMixin, generic.ListView):
     model = UserLog
     context_object_name = 'userlog_list' 
+    paginate_by = 2
     def get_queryset(self):
-        # """Return the last five meal types."""
-        return UserLog.objects.order_by('log_time')[:10]
+        return UserLog.objects.order_by('log_time')
      
 class UserLogCreate(LoginRequiredMixin, CreateView):
     model = UserLog

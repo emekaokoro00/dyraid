@@ -5,19 +5,58 @@
 <div id="content-main">
 <h1>User Logs</h1>
 {% if userlog_list %}
-    <ul>
-    {% for userlog in userlog_list %}
-        <li> {{ userlog }}  :  
-		    <a href="{% url "home:userlog_detail" userlog.id %}">view</a> |
-		    <a href="{% url "home:userlog_update" userlog.id %}">edit</a> |
-		    <a href="{% url "home:userlog_delete" userlog.id %}">delete</a>
-	    </li>
+
+
+
+	<table class="table table-bordered">
+	  <thead>
+	    <tr>
+	      <th></th>
+	      <th>Type</th>
+	      <th></th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    {% for userlog in userlog_list %}
+	      <tr>
+	        <td>{{ userlog }}</td>
+	        <td>{{ userlog.log_time }}</td>
+	        <td> 
+			    <a href="{% url "home:userlog_detail" userlog.id %}">view</a> |
+			    <a href="{% url "home:userlog_update" userlog.id %}">edit</a> |
+			    <a href="{% url "home:userlog_delete" userlog.id %}">delete</a>
+			</td>
+	      </tr>
+	    {% endfor %}
+	  </tbody>
+	</table>
+{% if is_paginated %}
+  <ul class="pagination">
+    {% if page_obj.has_previous %}
+      <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in paginator.page_range %}
+      {% if page_obj.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
     {% endfor %}
-    </ul>
+    {% if page_obj.has_next %}
+      <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}
+	
 {% else %}
-    <p>No meals are available.</p>
+    <p>No logs are available.</p>
 {% endif %}
 <a href="{% url "home:userlog_create" %}">New</a> 
 
 </div>
+
 {% endblock %}
