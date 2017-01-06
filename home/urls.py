@@ -25,6 +25,7 @@ urlpatterns = [
     url(r'^userlog/detail/(?P<pk>[0-9]+)$', views.UserLogDetail.as_view(), name='userlog_detail'),
     url(r'^userlog/update/(?P<pk>[0-9]+)$', views.UserLogUpdate.as_view(), name='userlog_update'),
     url(r'^userlog/delete/(?P<pk>[0-9]+)$', views.UserLogDelete.as_view(), name='userlog_delete'),
+    # url(r'^userlog/$', views.search_userlog, name='search_userlog'),
     
     url(r'^(?P<pk>[0-9]+)/$', views.detail, name='detail'),
     url(r'^(?P<pk>[0-9]+)/results/$', views.results, name='results'),

@@ -4,10 +4,18 @@
 {% block content %}
 <div id="content-main">
 <h1>User Logs</h1>
+
+<form id="searchform" action="." method="get" accept-charset="utf-8">
+{% csrf_token %}
+  <button class="searchbutton" type="submit">
+    <i class="fa fa-search"></i>
+  </button>
+  <input class="searchfield" data-id="{{userlog.id}}"  id="search_comment" name="search_comment" type="text" placeholder="Search">
+
+
+
+
 {% if userlog_list %}
-
-
-
 	<table class="table table-bordered">
 	  <thead>
 	    <tr>
@@ -50,13 +58,37 @@
       <li class="disabled"><span>&raquo;</span></li>
     {% endif %}
   </ul>
-{% endif %}
-	
+{% endif %}	
 {% else %}
     <p>No logs are available.</p>
 {% endif %}
 <a href="{% url "home:userlog_create" %}">New</a> 
 
+</form>
+
+
 </div>
 
+{% endblock %}
+
+
+{% block extrascripts %}
+  <script>
+  
+$(document).ready(function(){
+	$('#searchform').submit(function (event) {
+		//event.preventDefault(); //Uncomment to activate AJAX
+		$.ajax({
+	    	type:"get",
+	    	url:"{% url 'home:userlog_list' %}",
+	    	data : {
+	            'search_comment': $('#search_comment').val(),
+	            'csrfmiddlewaretoken':$("input[name=csrfmiddlewaretoken]").val()
+	           	},
+	    });
+		//alert('jvoih');
+   	})
+ });
+  
+  </script>
 {% endblock %}
