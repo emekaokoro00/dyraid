@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'home.apps.HomeConfig',
     #'home'
+    'userlog.apps.UserlogConfig',
     'django.contrib.admin',
     
     #from django-registration-redux

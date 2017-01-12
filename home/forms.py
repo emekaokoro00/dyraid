@@ -3,7 +3,7 @@ from django import forms
 from django.forms import ModelForm
 from bootstrap3_datetime.widgets import DateTimePicker
 
-from .models import Meal_Type, Meal, UserLog
+from .models import Meal_Type, Meal
 
 class UserForm(ModelForm):  
     # last_edit_date = forms.DateTimeField(widget=forms.SelectDateWidget)
@@ -19,19 +19,7 @@ class UserForm(ModelForm):
         fields = ('username', 'email', 'password', 'first_name', 'last_name')
         # fields = "__all__"
 #}   
-  
-class UserLogForm(forms.ModelForm):  #{        
-    def __init__(self, *args, **kwargs):
-        super(UserLogForm, self).__init__(*args, **kwargs)        
-        self.fields['meal'].required = True 
-        self.fields['log_time'].required = True 
-        self.fields['log_time'].widget=DateTimePicker(options={"format": "YYYY-MM-DD HH:mm"})         
-        self.fields['comment'].required = False  
-        self.fields['comment'].widget=forms.Textarea(attrs={'required':False})       
-    class Meta:
-        model = UserLog
-        fields = ['meal', 'log_time', 'comment']
-#}      
+     
 
 class MealForm(forms.ModelForm):    
     food_name = forms.CharField(max_length=100, widget=forms.TextInput, required=True)

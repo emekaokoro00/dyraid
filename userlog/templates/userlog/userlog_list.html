@@ -30,9 +30,9 @@
 	        <td>{{ userlog }}</td>
 	        <td>{{ userlog.log_time }}</td>
 	        <td> 
-			    <a href="{% url "home:userlog_detail" userlog.id %}">view</a> |
-			    <a href="{% url "home:userlog_update" userlog.id %}">edit</a> |
-			    <a href="{% url "home:userlog_delete" userlog.id %}">delete</a>
+			    <a href="{% url "userlog:userlog_detail" userlog.id %}">view</a> |
+			    <a href="{% url "userlog:userlog_update" userlog.id %}">edit</a> |
+			    <a href="{% url "userlog:userlog_delete" userlog.id %}">delete</a>
 			</td>
 	      </tr>
 	    {% endfor %}
@@ -62,7 +62,7 @@
 {% else %}
     <p>No logs are available.</p>
 {% endif %}
-<a href="{% url "home:userlog_create" %}">New</a> 
+<a href="{% url "userlog:userlog_create" %}">New</a> 
 
 </form>
 
@@ -80,7 +80,7 @@ $(document).ready(function(){
 		//event.preventDefault(); //Uncomment to activate AJAX
 		$.ajax({
 	    	type:"get",
-	    	url:"{% url 'home:userlog_list' %}",
+	    	url:"{% url 'userlog:userlog_list' %}",
 	    	data : {
 	            'search_comment': $('#search_comment').val(),
 	            'csrfmiddlewaretoken':$("input[name=csrfmiddlewaretoken]").val()
