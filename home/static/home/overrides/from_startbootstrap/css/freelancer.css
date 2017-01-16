@@ -1,0 +1,42 @@
+a,
+a:hover,
+a:focus,
+a:active,
+a.active {
+  color: #2c3e50;
+  outline: none;
+}
+.navbar-custom .navbar-nav li a:hover {
+  color: #3381cf;
+  outline: none;
+}
+.navbar-custom .navbar-nav li.active a {
+  color: white;
+  background: #3381cf;
+}
+.navbar-custom .navbar-nav li.active a:hover,
+.navbar-custom .navbar-nav li.active a:focus,
+.navbar-custom .navbar-nav li.active a:active {
+  color: white;
+  background:#3381cf;
+}
+.btn-success {
+  color: white;
+  background-color: #2c3e50;
+  border-color: #2c3e50;
+  font-weight: 700;
+}
+header
+{
+	text-align:center;
+	background:#2c3e50;
+}
+section.success
+{
+	background:#2c3e50;
+	color:#fff;
+}
+hr.star-light:after {
+  background-color: #2c3e50;
+  color: white;
+}

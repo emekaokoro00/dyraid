@@ -34,6 +34,9 @@ def logout_view(request):
     logout(request)
     return render(request, 'home/logged_out.html')
 
+def about(request):
+    return render(request, 'home/about.html')
+
 def create_user(request):
     if request.method == "POST":
         form = UserForm(request.POST)

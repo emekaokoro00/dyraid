@@ -5,7 +5,8 @@ from . import views
 app_name = 'home'
 urlpatterns = [
     url(r'^$', views.index, name='index'),
-    url(r'^logout/$', views.logout_view, name='logout'),     
+    url(r'^logout/$', views.logout_view, name='logout'),  
+    url(r'^about/$', views.about, name='about'),   
     
     #FBV
 #     url(r'^meal/$', views.meal_list, name='meal_list'),

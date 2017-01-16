@@ -17,9 +17,9 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.contrib.auth import views
 
-urlpatterns = [
-    url(r'^home/', include('home.urls')),
+urlpatterns = [        
     url(r'', include('home.urls')),
+    url(r'^home/', include('home.urls')),
     url(r'^userlog/', include('userlog.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('registration.backends.simple.urls')), #sets the user management page
