@@ -1,3 +1,14 @@
+
+
+
+
+
+
+
+
+
+
+
 """
 Django settings for dyraid project.
 
@@ -32,7 +43,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'home.apps.HomeConfig',
-    #'home'
+XxxxxxxX    #'home'
     'userlog.apps.UserlogConfig',
     'django.contrib.admin',
     

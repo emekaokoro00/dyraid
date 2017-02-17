@@ -22,7 +22,10 @@ urlpatterns = [
     url(r'^home/', include('home.urls')),
     url(r'^userlog/', include('userlog.urls')),
     url(r'^admin/', admin.site.urls),
-    url(r'^accounts/', include('registration.backends.simple.urls')), #sets the user management page
+    
+    # url(r'^accounts/', include('registration.backends.simple.urls')), #django-registration sets the user management page
+    url(r'^accounts/', include('allauth.urls')), #django-allauth sets the user management page
+    
     url(r'^login/', views.login, {'template_name': 'registration/login.html'}), # sets the login page
     # url(r'^logout/$', views.logout, {'next_page': 'login'}),  
     # url(r'^logout/$', views.logout, {'next_page': 'home/logout.html'}),  
