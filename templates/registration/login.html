@@ -64,6 +64,11 @@
 
 </div>
 <div>
+{% load socialaccount %}
+{% providers_media_js %}
+<a href="{% provider_login_url "facebook" method="js_sdk" %}">Facebook Connect</a>
+</div>
+<div>
 <a href="{% url 'account_signup' %}">Sign Up</a>
 </div>
 {% endblock %}
