@@ -9,6 +9,9 @@ from django.forms import forms
 from unittest.util import _MAX_LENGTH
 from django.utils import timezone
 import datetime
+from django.template.defaultfilters import default
+
+DEFAULT_VALUE = 1
 
 # Create your models here.
 @python_2_unicode_compatible # to support Python 2
@@ -31,11 +34,19 @@ class Meal_Type(models.Model):
     description = models.CharField(max_length=50, default="Title")
     def __str__(self):
         return self.meal_type_name
+    
+@python_2_unicode_compatible # to support Python 2
+class Restaurant(models.Model):
+    name = models.CharField(max_length=100)
+    address = models.CharField(max_length=50, default="Title")
+    def __str__(self):
+        return self.name
 
 @python_2_unicode_compatible # to support Python 2
 class Meal(models.Model):
     food_name = models.CharField(max_length=100)
     food_type = models.ForeignKey(Meal_Type, on_delete=models.CASCADE)
+    restaurant_offering = models.ForeignKey(Restaurant, on_delete=models.CASCADE, default=DEFAULT_VALUE)
     calories = models.IntegerField(default=0)
     def __str__(self):
         return self.food_name

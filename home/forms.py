@@ -30,4 +30,4 @@ class MealForm(forms.ModelForm):
         pass
     class Meta:
         model = Meal
-        fields = ['food_name', 'food_type', 'calories']     
+        fields = ['food_name', 'food_type', 'calories', 'restaurant_offering']     
