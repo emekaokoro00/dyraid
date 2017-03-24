@@ -20,15 +20,23 @@ from braces import views # Ajax Mixin included
 from .models import Meal_Type, Meal
 from .forms import UserForm, MealForm
 
+from userlog.views import UserLogList
+
 
 #NOTES
 #Currently you use the admin login
 #You can create your own login ... check "https://docs.djangoproject.com/en/1.10/topics/auth/default/"
 @login_required() # settings for redirect found in settings.py - LOGIN_URL
 def index(request):
-    latest_meal_type_list = Meal_Type.objects.order_by('-meal_type_name')[:5]
-    context = {'latest_meal_type_list': latest_meal_type_list}
-    return render(request, 'home/index.html')
+#     latest_meal_type_list = Meal_Type.objects.order_by('-meal_type_name')[:5]
+#     context = {'latest_meal_type_list': latest_meal_type_list}
+ 
+#     return render(request, 'home/index.html')
+    objUserLogList = UserLogList()
+    objUserLogList.request = request
+    userlog_list = objUserLogList.get_queryset()
+    context = {'userlog_list': userlog_list}
+    return render(request, 'home/index.html', context)
 
 def logout_view(request):
     logout(request)
@@ -134,10 +142,11 @@ def rate(request, logger_id):
 
 #LoginRequiredMixin to make sure that user is logged in, redirects to url in settings
 
+
 class MealList(LoginRequiredMixin, generic.ListView):
     model = Meal
     # template_name = 'home/meal_list.html'  # Default: <app_label>/<model_name>_list.html
-    context_object_name = 'meal_list' 
+    context_object_name = 'meal_list'
     paginate_by = 4
     # queryset = Meal.objects.all()  # Default: Model.objects.all()    
     def get_queryset(self):
