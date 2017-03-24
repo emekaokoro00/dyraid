@@ -3,8 +3,6 @@ from django import forms
 from bootstrap3_datetime.widgets import DateTimePicker
 
 from .models import  UserLog
-
-
   
 class UserLogForm(forms.ModelForm):  #{        
     def __init__(self, *args, **kwargs):

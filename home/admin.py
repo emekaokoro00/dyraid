@@ -3,7 +3,9 @@ from django.contrib import admin
 from django import forms
 
 # Register your models here.
-from .models import Logger, Meal, Meal_Type
+from .models import Logger
+from meal.models import Meal, Meal_Type
+from userlog.models import UserLog
 
 #set admin title
 admin.site.site_header = 'Dyraid'

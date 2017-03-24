@@ -17,8 +17,10 @@ from django.forms.models import ModelForm
 from braces import views # Ajax Mixin included
 
 # Create your views here.
-from .models import Meal_Type, Meal
-from .forms import UserForm, MealForm
+from meal.models import Meal, Meal_Type
+from meal.forms import MealForm
+from userlog.models import UserLog
+from .forms import UserForm
 
 from userlog.views import UserLogList
 
@@ -142,32 +144,4 @@ def rate(request, logger_id):
 
 #LoginRequiredMixin to make sure that user is logged in, redirects to url in settings
 
-
-class MealList(LoginRequiredMixin, generic.ListView):
-    model = Meal
-    # template_name = 'home/meal_list.html'  # Default: <app_label>/<model_name>_list.html
-    context_object_name = 'meal_list'
-    paginate_by = 4
-    # queryset = Meal.objects.all()  # Default: Model.objects.all()    
-    def get_queryset(self):
-        # """Return the last five meal types."""
-        return Meal.objects.order_by('food_name')
-     
-class MealCreate(LoginRequiredMixin, CreateView):
-    model = Meal
-    form_class = MealForm
-    
-class MealDetail(LoginRequiredMixin, DetailView):
-    model = Meal
-    form_class = MealForm
-    template_name_suffix = '_detail'
-     
-class MealUpdate(LoginRequiredMixin, UpdateView):
-    model = Meal
-    form_class = MealForm
-    template_name_suffix = '_update_form'
-     
-class MealDelete(LoginRequiredMixin, DeleteView):
-    model = Meal
-    success_url = reverse_lazy('home:meal_list')
     

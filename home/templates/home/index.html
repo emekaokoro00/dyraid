@@ -283,8 +283,8 @@
 {% endblock %}
 
 {% block index_page %}<a href="{% url 'home:index' %}" class="site_title"><i class="fa fa-home"></i> <span> Home </span></a>{% endblock %}
-{% block meal_page %}<a href="{% url 'home:meal_list' %}"><i class="fa fa-cutlery"></i> <span> Meal </span></a>{% endblock %}
-{% block exercise_page %}<a href="{% url 'home:meal_list' %}"><i class="fa fa-bicycle"></i> <span> Exercise </span></a>{% endblock %}
+{% block meal_page %}<a href="{% url 'meal:meal_list' %}"><i class="fa fa-cutlery"></i> <span> Meal </span></a>{% endblock %}
+{% block exercise_page %}<a href="{% url 'home:index' %}"><i class="fa fa-bicycle"></i> <span> Exercise </span></a>{% endblock %}
 {% block userlog_page %}<a href="{% url 'userlog:userlog_list' %}"><i class="fa fa-book"></i> <span> Logs </span></a>{% endblock %}
 
 {% block change_password_url %}<a href="{% url 'account_change_password' %}"><i class="fa pull-right"></i> {% trans 'Change password' %}</a>{% endblock %}

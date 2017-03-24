@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'home.apps.HomeConfig',
     #'home'
     'userlog.apps.UserlogConfig',
+    'meal.apps.MealConfig',
     'django.contrib.admin',
     
 #     #from django-registration-redux

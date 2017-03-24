@@ -6,7 +6,7 @@ from django.db import models
 from django import forms
 from django.utils import timezone
 
-from home.models import Meal
+from meal.models import Meal
 
 
 # Create your models here.

@@ -1,0 +1,27 @@
+{% extends "home/index.html" %}
+{% load i18n static %}
+
+{% block content %}
+
+<form action="" method="post" role="form">
+{% csrf_token %}
+{{ form.as_p }}
+<div class="form-group">
+<input type="submit" value="Submit" class="btn btn-primary" />
+</div>
+</form>
+
+{% endblock %}
+
+
+
+{% block extrascripts %}
+<!-- <script type="text/javascript"> -->
+//    $(function() {
+// 	   $('#user_log_datetimepicker').datetimepicker({
+// 		   inline: true,
+// 		   sideBySide: true
+// 	   });
+//    });
+<!-- </script> -->
+{% endblock %}

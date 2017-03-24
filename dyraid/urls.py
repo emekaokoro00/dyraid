@@ -21,6 +21,7 @@ urlpatterns = [
     url(r'', include('home.urls')),
     url(r'^home/', include('home.urls')),
     url(r'^userlog/', include('userlog.urls')),
+    url(r'^meal/', include('meal.urls')),
     url(r'^admin/', admin.site.urls),
     
     # url(r'^accounts/', include('registration.backends.simple.urls')), #django-registration sets the user management page
