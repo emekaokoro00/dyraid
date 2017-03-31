@@ -19,7 +19,7 @@ class MealList(LoginRequiredMixin, generic.ListView):
     model = Meal
     # template_name = 'home/meal_list.html'  # Default: <app_label>/<model_name>_list.html
     context_object_name = 'meal_list'
-    paginate_by = 4
+    paginate_by = 2
     # queryset = Meal.objects.all()  # Default: Model.objects.all()    
     def get_queryset(self):
         # """Return the last five meal types."""
