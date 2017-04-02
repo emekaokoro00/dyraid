@@ -24,6 +24,9 @@ urlpatterns = [
     url(r'^meal/', include('meal.urls')),
     url(r'^admin/', admin.site.urls),
     
+    # for browsable API with djangoRESTframework
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    
     # url(r'^accounts/', include('registration.backends.simple.urls')), #django-registration sets the user management page
     url(r'^accounts/', include('allauth.urls')), #django-allauth sets the user management page
     
