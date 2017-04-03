@@ -16,35 +16,13 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from django.contrib.auth import views
-from rest_framework import routers, viewsets, serializers
-from django.contrib.auth.models import User
-
-
-class UserSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = User
-        fields = ('username', 'email')
-        
-#ViewSets define the view behavior
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-    
-# Routers provide an easy way of automatically determining URL conf
-router = routers.DefaultRouter()
-router.register(r'api/users', UserViewSet)
-# admin.autodiscover()
 
 urlpatterns = [        
     url(r'', include('home.urls')),
     url(r'^home/', include('home.urls')),
     url(r'^userlog/', include('userlog.urls')),
     url(r'^meal/', include('meal.urls')),
-    url(r'^admin/', admin.site.urls),    
-    
-    # for browsable API with djangoRESTframework
-    url(r'^', include(router.urls)),
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^admin/', admin.site.urls),        
     
     # url(r'^accounts/', include('registration.backends.simple.urls')), #django-registration sets the user management page
     url(r'^accounts/', include('allauth.urls')), #django-allauth sets the user management page

@@ -16,14 +16,18 @@ from django.forms.models import ModelForm
 
 from braces import views # Ajax Mixin included
 
-# Create your views here.
 from meal.models import Meal, Meal_Type
 from meal.forms import MealForm
 from userlog.models import UserLog
 from .forms import UserForm
 
+#REST
+from rest_framework import viewsets, serializers
+from .serializers import UserSerializer
+
 from userlog.views import UserLogList
 
+# Create your views here.
 
 #NOTES
 #Currently you use the admin login
@@ -60,6 +64,14 @@ def create_user(request):
 
     return render(request, 'home/registration_form.html', {'form': form})
 
+#ViewSets define the view behavior
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
+
+
 # Logger with rating, Meal with Meal Type
 def detail(request, meal_type_id):
     meal_type = get_object_or_404(Meal_Type, pk=meal_type_id)
@@ -91,5 +103,4 @@ def increase_calorie_for_meal(request, meal_type_id):
 
 def rate(request, logger_id):
     return HttpResponse("You're rating on Logger %s." % logger_id)
-
 
