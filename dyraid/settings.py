@@ -26,7 +26,7 @@ SECRET_KEY = ')ctt0p%qkdx&y!i4xzp9)7s97ye!!ued=v6o_w2e1b$#!xb17e'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [u'192.168.56.56', u'localhost']
 
 
 # Application definition
@@ -50,6 +50,9 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.facebook',
     
     'rest_framework', #djangoRESTfrmework
+    'rest_framework.authtoken',
+    'rest_auth',
+    'rest_auth.registration',
     
     'django.contrib.auth',
     'django.contrib.contenttypes',
