@@ -8,9 +8,11 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import FormView, CreateView, UpdateView, DeleteView
 
 from braces import views # Ajax Mixin included
+from rest_framework import generics
 
 from .models import UserLog
 from .forms import UserLogForm
+from .serializers import UserLogSerializer
 
 # Create your views here.
 
@@ -20,10 +22,6 @@ class UserLogList(LoginRequiredMixin, views.JSONResponseMixin, views.AjaxRespons
     model = UserLog
     context_object_name = 'userlog_list' 
     paginate_by = 2
-#     def post_ajax(self, request, *args, **kwargs):
-#         data = request.POST.items() # form data
-#         ctx = {'hi': 'hello'}
-#         return self.render_json_response(ctx)
     def get_ajax(self, request, *args, **kwargs):
         search_comment = self.request.GET.get('search_comment') 
         # data = request.GET.items() # form data        
@@ -43,6 +41,15 @@ class UserLogList(LoginRequiredMixin, views.JSONResponseMixin, views.AjaxRespons
         #The current context.
         context = super(UserLogList, self).get_context_data(**kwargs)
         return context
+
+
+class UserLogList_API(generics.ListCreateAPIView):
+    queryset = UserLog.objects.all()
+    serializer_class = UserLogSerializer
+    
+class UserLogDetail_API(generics.RetrieveUpdateDestroyAPIView):
+    queryset = UserLog.objects.all()
+    serializer_class = UserLogSerializer
 
 # @login_required
 # def search_userlog(request):
