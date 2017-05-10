@@ -15,7 +15,7 @@ urlpatterns = [
     url(r'^delete/(?P<pk>[0-9]+)$', views.UserLogDelete.as_view(), name='userlog_delete'),
     # url(r'^userlog/$', views.search_userlog, name='search_userlog'),
     
-    # api for json
+    # for browsable API with djangoRESTframework
     url(r'^api/$', views.UserLogList_API.as_view()),
     url(r'^api/(?P<pk>[0-9]+)/$', views.UserLogDetail_API.as_view()),
 ]

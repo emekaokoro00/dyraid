@@ -47,7 +47,7 @@ class UserLogList_API(generics.ListCreateAPIView):
     queryset = UserLog.objects.all()
     serializer_class = UserLogSerializer
     
-class UserLogDetail_API(generics.RetrieveUpdateDestroyAPIView):
+class UserLogDetail_API(generics.RetrieveUpdateDestroyAPIView): 
     queryset = UserLog.objects.all()
     serializer_class = UserLogSerializer
 
