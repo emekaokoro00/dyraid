@@ -46,8 +46,13 @@ class UserLogList(LoginRequiredMixin, views.JSONResponseMixin, views.AjaxRespons
 
 
 class UserLogList_API(generics.ListCreateAPIView):
-    queryset = UserLog.objects.all()
     serializer_class = UserLogSerializer
+    
+    def get_queryset(self):
+        user = self.request.user.id # used id for REST framework
+        userlog_list = UserLog.objects.filter(user=user)
+        # return generics.ListCreateAPIView.get_queryset(self)
+        return userlog_list
     
 class UserLogDetail_API(generics.RetrieveUpdateDestroyAPIView): 
     queryset = UserLog.objects.all()
