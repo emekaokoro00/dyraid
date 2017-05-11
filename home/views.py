@@ -23,6 +23,10 @@ from .forms import UserForm
 
 #REST
 from rest_framework import viewsets, serializers
+from rest_framework.response import Response
+from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.authtoken.models import Token
+
 from .serializers import UserSerializer
 
 from userlog.views import UserLogList
@@ -68,7 +72,12 @@ def create_user(request):
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-
+#     
+    def get_object(self):
+        pk = self.kwargs.get('pk')
+        if pk == "current":
+            return self.request.user
+        return super(UserViewSet, self).get_object()
 
 
 
