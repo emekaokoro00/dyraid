@@ -4,7 +4,7 @@ from rest_framework import viewsets, serializers
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
-        fields = ('username', 'email', 'password')    
+        fields = ('username', 'password')    
     
 # class UserLogList(viewsets.ModelViewSet):
 #     model = UserLog

@@ -13,6 +13,7 @@ from rest_framework import generics
 from .models import UserLog
 from .forms import UserLogForm
 from .serializers import UserLogSerializer
+from django.template.context_processors import request
 
 # Create your views here.
 
@@ -33,6 +34,7 @@ class UserLogList(LoginRequiredMixin, views.JSONResponseMixin, views.AjaxRespons
         return self.render_json_response(json_dict)
     def get_queryset(self):
         userlog_list = super(UserLogList, self).get_queryset()
+        userlog_list = userlog_list.filter(user=self.request.user)
         search_comment = self.request.GET.get('search_comment')
         if search_comment:
             userlog_list = userlog_list.filter(comment__icontains=search_comment)

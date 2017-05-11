@@ -30,6 +30,7 @@ from rest_framework.authtoken.models import Token
 from .serializers import UserSerializer
 
 from userlog.views import UserLogList
+from django.template.context_processors import request
 
 # Create your views here.
 
@@ -67,6 +68,13 @@ def create_user(request):
         form = UserForm() 
 
     return render(request, 'home/registration_form.html', {'form': form})
+
+# #overwrite token to get user id
+# class CustomObtainAuthToken(ObtainAuthToken):
+#     def get(self, request, *args, **kwargs):
+#         response = super(CustomObtainAuthToken, self).post(request, *args, **kwargs)
+#         token = Token.objects.get(key=response.data['token'])
+#         return Response({'token': token.key, 'id':token.user_id})
 
 #ViewSets define the view behavior
 class UserViewSet(viewsets.ModelViewSet):
