@@ -8,6 +8,10 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import FormView, CreateView, UpdateView, DeleteView
 
 from braces import views # Ajax Mixin included
+from rest_framework import generics
+
+from .forms import MealForm
+from .serializers import MealSerializer
 
 from .models import Meal
 from .forms import MealForm
@@ -24,7 +28,20 @@ class MealList(LoginRequiredMixin, generic.ListView):
     def get_queryset(self):
         # """Return the last five meal types."""
         return Meal.objects.order_by('food_name')
-     
+
+class MealList_API(generics.ListCreateAPIView):
+    serializer_class = MealSerializer
+    
+    def get_queryset(self):
+        user = self.request.user.id # used id for REST framework
+        meal_list = Meal.objects.filter(user=user)
+        # return generics.ListCreateAPIView.get_queryset(self)
+        return meal_list
+    
+class MealDetail_API(generics.RetrieveUpdateDestroyAPIView): 
+    queryset = Meal.objects.all()
+    serializer_class = MealSerializer
+    
 class MealCreate(LoginRequiredMixin, CreateView):
     model = Meal
     form_class = MealForm

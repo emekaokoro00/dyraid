@@ -6,6 +6,7 @@
 <h1>Meal</h1>
 <p>Name: {{ meal.food_name }}</p>
 <p>Type: {{ meal.food_type }}</p>
+<p>Restaurant: {{ meal.restaurant_offering }}</p>
 <p>Calories: {{ meal.calories }}</p>
 
  <a href="{% url "meal:meal_update" meal.id %}">Edit</a> |  <a href="{% url "meal:meal_delete" meal.id %}">Delete</a> |

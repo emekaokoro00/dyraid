@@ -18,4 +18,7 @@ urlpatterns = [
     url(r'^update/(?P<pk>[0-9]+)$', views.MealUpdate.as_view(), name='meal_update'),
     url(r'^delete/(?P<pk>[0-9]+)$', views.MealDelete.as_view(), name='meal_delete'),
     
+    # for browsable API with djangoRESTframework
+    url(r'^api/$', views.MealList_API.as_view()),
+    url(r'^api/(?P<pk>[0-9]+)/$', views.MealDetail_API.as_view()),
 ]

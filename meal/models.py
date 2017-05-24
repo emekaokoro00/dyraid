@@ -10,7 +10,11 @@ from django.template.defaultfilters import default
 # Create your models here.
 
 DEFAULT_VALUE = 1
-
+    
+# class to simulate enum
+class Meal_Size:
+    VerySmall, Small, Medium, Large, VeryLarge = range(5)
+    
 @python_2_unicode_compatible # to support Python 2
 class Meal_Type(models.Model):
     meal_type_name = models.CharField(max_length=100)
@@ -18,14 +22,14 @@ class Meal_Type(models.Model):
     def __str__(self):
         return self.meal_type_name
         
-@python_2_unicode_compatible # to support Python 2
+@python_2_unicode_compatible
 class Restaurant(models.Model):
     name = models.CharField(max_length=100)
     address = models.CharField(max_length=50, default="Title")
     def __str__(self):
         return self.name
-
-@python_2_unicode_compatible # to support Python 2
+    
+@python_2_unicode_compatible
 class Meal(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=DEFAULT_VALUE)
     food_name = models.CharField(max_length=100)

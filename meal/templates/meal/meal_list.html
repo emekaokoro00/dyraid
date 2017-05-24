@@ -20,6 +20,7 @@
 	      <th></th>
 	      <th>Type</th>
 	      <th></th>
+	      <th></th>
 	    </tr>
 	  </thead>
 	  <tbody>
@@ -27,6 +28,7 @@
 	      <tr>
 	        <td>{{ meal.food_name }}</td>
 	        <td>{{ meal.food_type }}</td>
+	        <td>{{ meal.restaurant_offering }}</td>
 	        <td>{{ meal.calories }}</td>
 	        <td> 
 			    <a href="{% url "meal:meal_detail" meal.id %}">view</a> |
