@@ -133,6 +133,14 @@ LOGIN_REDIRECT_URL = '/' # for url management when adding login
 #for djang0-allauth
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' #prevent email being sent
 
+ACCOUNT_SIGNUP_FORM_CLASS = 'home.forms.UserProfileForm'
+## consider puttingn
+# ACCOUNT_AUTHENTICATION_METHOD = "email"
+# 
+# ACCOUNT_EMAIL_REQUIRED = True
+# ACCOUNT_USERNAME_REQUIRED = True
+# ACCOUNT_UNIQUE_EMAIL = True
+
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',

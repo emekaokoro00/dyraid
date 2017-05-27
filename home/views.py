@@ -19,7 +19,7 @@ from braces import views # Ajax Mixin included
 from meal.models import Meal, Meal_Type
 from meal.forms import MealForm
 from userlog.models import UserLog
-from .forms import UserForm
+from .forms import UserProfileForm
 
 #REST
 from rest_framework import viewsets, serializers
@@ -58,14 +58,14 @@ def about(request):
 
 def create_user(request):
     if request.method == "POST":
-        form = UserForm(request.POST)
+        form = UserProfileForm(request.POST)
         if form.is_valid():
             new_user = User.objects.create_user(**form.cleaned_data)
             login(request, new_user)
             # redirect, or however you want to get to the main view
             return render(request, 'home/index.html')
     else:
-        form = UserForm() 
+        form = UserProfileForm() 
 
     return render(request, 'home/registration_form.html', {'form': form})
 
