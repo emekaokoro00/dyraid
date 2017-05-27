@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^rest-auth/', include('rest_auth.urls')),
     url(r'^rest-auth/registration/', include('rest_auth.registration.urls')),
     # url(r'^authenticate/', CustomObtainAuthToken.as_view()),
+    url(r'userprofile_detail/', views.UserProfileDetail.as_view(), name='userprofile_detail'),
     
     url(r'^(?P<pk>[0-9]+)/$', views.detail, name='detail'),
     url(r'^(?P<pk>[0-9]+)/results/$', views.results, name='results'),

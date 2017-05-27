@@ -3,7 +3,7 @@ from django import forms
 from django.forms import ModelForm
 from bootstrap3_datetime.widgets import DateTimePicker
 
-from .models import UserProfile
+from .models import UserProfile, User_Type
 
 # class UserForm(ModelForm):  
 class UserProfileForm(ModelForm):  
@@ -13,11 +13,15 @@ class UserProfileForm(ModelForm):
     # password = forms.CharField(max_length=100, widget=forms.TextInput)
     first_name = forms.CharField(max_length=100, widget=forms.TextInput)
     last_name = forms.CharField(max_length=100, widget=forms.TextInput)
-    # entry = forms.CharField(widget=forms.Textarea)
+    # user_type = forms.ChoiceField(choices=[(x, x) for x in range(1, 32)])
+    user_type = forms.ChoiceField(choices=[(e.value, e.name.replace("_", " ")) for e in User_Type])
+    # user_type_choices = [(e.name, e.value) for e in User_Type]
+    # user_type = forms.ChoiceField(choices=user_type_choices)
+    
     
     class Meta:
         model = User
-        fields = ('username', 'email', 'first_name', 'last_name')
+        fields = ('username', 'email', 'first_name', 'last_name', 'user_type')
         # fields = "__all__"
         
     # A custom method required to work with django-allauth, see https://stackoverflow.com/questions/12303478/how-to-customize-user-profile-when-using-django-allauth

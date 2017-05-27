@@ -126,8 +126,8 @@
 		            {% endblock %}
                     <span class=" fa fa-angle-down"></span>
                   </a>
-                  <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="javascript:;"> Profile</a></li>		                    
+                  <ul class="dropdown-menu dropdown-usermenu pull-right">	
+                    <li>{% block view_profile %}{% endblock %}</li>	                    
 		            {% block userlinks1 %}
 		                {% if site_url %}
 		                    <li><a href="{{ site_url }}">{% trans 'View site' %}</a></li>

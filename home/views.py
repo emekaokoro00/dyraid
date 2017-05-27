@@ -19,6 +19,8 @@ from braces import views # Ajax Mixin included
 from meal.models import Meal, Meal_Type
 from meal.forms import MealForm
 from userlog.models import UserLog
+from userlog.views import UserLogList
+from .models import UserProfile
 from .forms import UserProfileForm
 
 #REST
@@ -29,7 +31,6 @@ from rest_framework.authtoken.models import Token
 
 from .serializers import UserSerializer
 
-from userlog.views import UserLogList
 from django.template.context_processors import request
 
 # Create your views here.
@@ -69,13 +70,6 @@ def create_user(request):
 
     return render(request, 'home/registration_form.html', {'form': form})
 
-# #overwrite token to get user id
-# class CustomObtainAuthToken(ObtainAuthToken):
-#     def get(self, request, *args, **kwargs):
-#         response = super(CustomObtainAuthToken, self).post(request, *args, **kwargs)
-#         token = Token.objects.get(key=response.data['token'])
-#         return Response({'token': token.key, 'id':token.user_id})
-
 #ViewSets define the view behavior
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
@@ -86,8 +80,21 @@ class UserViewSet(viewsets.ModelViewSet):
         if pk == "current":
             return self.request.user
         return super(UserViewSet, self).get_object()
+    
 
-
+class UserProfileDetail(LoginRequiredMixin, DetailView):
+    # model = UserProfile
+    # form_class = UserProfileForm
+    template_name = 'home/userprofile_detail.html'
+    def get_object(self):
+        # return get_object_or_404(UserProfile, pk=request.session['user_id'])
+        return get_object_or_404(UserProfile, user=self.request.user.id)
+     
+# class UserProfileDetail(LoginRequiredMixin, DetailView):
+#     model = UserProfile
+#     form_class = UserProfileForm
+#     template_name_suffix = '_detail'
+    
 
 # Logger with rating, Meal with Meal Type
 def detail(request, meal_type_id):

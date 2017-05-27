@@ -6,23 +6,27 @@ from django import forms
 from django.db import models
 from django.forms import ModelForm
 from django.forms import forms
-from unittest.util import _MAX_LENGTH
 from django.utils import timezone
-import datetime
 from django.template.defaultfilters import default
+
+import datetime
+from unittest.util import _MAX_LENGTH
+from enum import Enum
 
 DEFAULT_VALUE = 1
 
 # Create your models here.
     
 # class to simulate enum
-class User_Type(models.Model):
-    end_user, restaurant, fitness_center = range(3)
+class User_Type(Enum):
+    End_User = 0
+    Restaurant = 1
+    Fitness_Center = 2
  
 @python_2_unicode_compatible # to support Python 2
 class UserProfile(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=DEFAULT_VALUE)
-    user_type = models.IntegerField(default=User_Type.end_user)
+    user_type = models.IntegerField(default=User_Type.End_User)
     check_comment = models.CharField(max_length=100)
 #     def save(self, *args, **kwargs):
 #         self.check_comment = 'check'
@@ -32,7 +36,7 @@ class UserProfile(models.Model):
     def __unicode__(self):
         return unicode(self.user)
     def get_absolute_url(self): # sets the default url to revert to after changes
-        return reverse('userlog:userlog_detail', kwargs={'pk': self.pk})
+        return reverse('home:userprofile_detail', kwargs={'pk': self.user.pk})
     
 @python_2_unicode_compatible # to support Python 2
 class Logger(models.Model): #{
