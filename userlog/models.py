@@ -16,7 +16,7 @@ class UserLog(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     meal = models.ForeignKey(Meal, on_delete=models.CASCADE)
     # log_time = models.DateTimeField('Time Logged')
-    log_time = models.DateTimeField('Time Logged', default=timezone.now())
+    log_time = models.DateTimeField('Time Logged', default=timezone.now)
     comment = models.CharField(max_length=1000)
     def __str__(self):
         return "Entry " + self.log_time.strftime('%Y/%b/%d/ - %I:%M:%S')

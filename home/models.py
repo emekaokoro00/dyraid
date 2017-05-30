@@ -22,11 +22,17 @@ class User_Type(Enum):
     End_User = 0
     Restaurant = 1
     Fitness_Center = 2
+     
+class Sex(Enum):
+    Female = 0
+    Male = 1
  
 @python_2_unicode_compatible # to support Python 2
 class UserProfile(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=DEFAULT_VALUE)
-    user_type = models.IntegerField(default=User_Type.End_User)
+    date_of_birth = models.DateTimeField('Date of Birth', default=timezone.now)
+    sex_type = models.IntegerField(default=Sex.Female.value)
+    user_type = models.IntegerField(default=User_Type.End_User.value)
     check_comment = models.CharField(max_length=100)
 #     def save(self, *args, **kwargs):
 #         self.check_comment = 'check'
