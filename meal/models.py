@@ -28,7 +28,10 @@ class Restaurant(models.Model):
     address = models.CharField(max_length=50, default="Title")
     def __str__(self):
         return self.name
-    
+
+# @python_2_unicode_compatible
+# class MealIngredients(models.Model):
+  
 @python_2_unicode_compatible
 class Meal(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=DEFAULT_VALUE)
